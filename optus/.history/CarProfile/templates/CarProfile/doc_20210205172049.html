@@ -1,0 +1,73 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+<div class="container">
+    <h1 class="display-3">Optus Practice </h1>
+    <p>
+    <h4>CRUD</h4>
+    </p>
+    <p>
+        This project wants to show CRUD functions. With Python Language and django framework. for storing data we use
+        postgresql as SQL system to RDS.
+    </p>
+    <p>
+    <h4>READ</h4>
+    </p>
+    <p>
+        for this project we imagine that we want to store Car information into the Backend. each car has its own name,
+        color, model and picture.
+        In Home page ( index.html ). we will have all objects in a list. (READ)
+
+    </p>
+    <p>
+    <h4>DELETE</h4>
+    </p>
+    <P>
+        each car will shoe in a card, and each card has its own two button. Delete and edit
+        if user want to delete an object, just by click on delete button this object will remove from database. ( DELETE
+        )
+
+    </P>
+    <p>
+    <h4>UPDATE</h4>
+    </p>
+    <p>
+        if user click on edit, user will direct to a new page to edit information about the object,(UPDATE)
+    </p>
+    <p>
+    <h4>CREATE</h4>
+    </p>
+    <p>
+        We have a form at the top of the page, you can add new car object by fill the form and submit the form. (CREATE)
+    </p>
+
+</div>
+<div class="container">
+    <h1 class="display-3"> PostgreSQL CREATE PROCEDURE </h1>
+    <p>
+        Django will handel all coding of PostgreSQL create procedure by itself. the only database that let us to write
+        by our self is oracle.
+        but i want to show how would i write PostgreSQL for our database:
+        to create Table of our database :
+    <h4> <code>
+        <p> CREATE TABLE public."Cars"</p>
+        <p> ( </p>
+           <p> id integer NOT NULL DEFAULT nextval('"Cars_id_seq"'::regclass),</p>
+           <p>name character varying(30) COLLATE pg_catalog."default" NOT NULL,</p>
+           <p>color character varying(30) COLLATE pg_catalog."default" NOT NULL,</p>
+           <p>model character varying(30) COLLATE pg_catalog."default" NOT NULL,</p>
+           <p>photo character varying(100) COLLATE pg_catalog."default" NOT NULL,</p>
+           <p>CONSTRAINT "Cars_pkey" PRIMARY KEY (id)</p>
+           <p>)</p>
+
+           <p>TABLESPACE pg_default;</p>
+
+           <p>ALTER TABLE public."Cars"</p>
+           <p>OWNER to postgres;</p>
+    </code>
+
+    </h4>
+    </p>
+
+</div>
+
+{% endblock %}

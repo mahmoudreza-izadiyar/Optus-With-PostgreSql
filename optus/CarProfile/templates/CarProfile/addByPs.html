@@ -1,0 +1,55 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+{% if message %}
+<div class="container">
+
+
+<div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+</div>
+{% endif  %}
+
+{{ hello }}
+
+<!-----------------------------------------------Insert----form ------------------------------------------------------>
+<div class="container">
+  <form method="post" action="{% url 'addByPs' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Name of Car</label>
+      <input type="text" class="form-control" id="car" aria-describedby="emailHelp" placeholder="Enter Car Name"
+          name="name" required>
+      <small id="emailHelp" class="form-text text-muted">Your car information plus its beautiful picture will store in
+        our database.</small>
+    </div>
+    <div class="form-group">
+      <label>Color Of car</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the color of your car"
+         name="color" required>
+    </div>
+    <div class="form-group">
+      <label>Model of Car (Year)</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the year of manufactured"
+       name="model" required>
+    </div>
+
+
+
+    <div class="custom-file">
+      <label>Picture of the car</label>
+      <input type="file" class="custom-file-input" id="customInput" name="photo" required>
+      <label class="custom-file-label" for="customInput">Choose Picture...</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:12px; text-align:center;">Submit</button>
+  </form>
+</div>
+<!---end--of----Insert----form---------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+{% endblock %}

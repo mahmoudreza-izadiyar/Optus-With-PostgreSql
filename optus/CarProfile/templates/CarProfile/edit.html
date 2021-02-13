@@ -1,0 +1,27 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ MEDIA_URL }}{{car.photo.url}}" alt="No picture">
+      <div class="card-body">
+
+        <h4 class="card-title">{{ car.name }}</h4>
+        <p class="card-text">Color:{{ car.color }}</p>
+        <p class="card-text"><strong>Model:</strong>{{ car.model }}</p>
+
+
+      </div>
+    </div>
+</div>
+<div class="container">
+<form method="POST" action="{% url 'edit' car.id %}" enctype="multipart/form-data">
+              {% csrf_token %}
+             <table>
+    {{ form.as_table }}
+    </table>
+              <button type="submit" class="btn btn-primary" style="margin-top:12px; text-align:center;">Save</button>
+          </form>
+
+</div>
+
+{% endblock %}

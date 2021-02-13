@@ -1,0 +1,55 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+
+{{ hello  }}
+
+<!-----------------------------------------------Insert----form ------------------------------------------------------>
+<div class="container">
+<form method="post">
+  <div class="form-group">
+    <label >Name of Car</label>
+    <input type="text" class="form-control" id="car" aria-describedby="emailHelp" placeholder="Enter Car Name" required>
+    <small id="emailHelp" class="form-text text-muted">Your car information plus its beautiful picture will store in our database.</small>
+  </div>
+  <div class="form-group">
+    <label >Color Of car</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the color of your car" required>
+  </div>
+   <div class="form-group">
+    <label >Model of Car (Year)</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the year of manufactured" required>
+  </div>
+
+
+
+<div class="custom-file">
+    <label >Picture of the car</label>
+    <input type="file" class="custom-file-input" id="customInput" required>
+    <label class="custom-file-label" for="customInput">Choose Picture...</label>
+</div>
+     <button type="submit" class="btn btn-primary" style="margin-top:12px; text-align:center;">Submit</button>
+</form>
+</div>
+<!---end--of----Insert----form---------------------------------------------------------------------------------------->
+
+<!-----List----Of ----Object------------------------------------------------------------------------------------------>
+
+<div class="grid-container">
+{% for car in cars %}
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ MEDIA_URL }}{{car.photo.url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ car.name }}</h5>
+    <p class="card-text">{{ car.color }}{{ car.model }}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+ {% endfor %}
+</div>
+
+
+
+
+
+
+{% endblock %}

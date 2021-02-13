@@ -1,0 +1,42 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+{% if message %}
+<div class="container">
+    <div class="alert alert-success" role="alert">
+          {{ message }}
+    </div>
+</div>
+{% endif  %}
+
+<div class="container">
+<br>
+  <br>
+  <br>
+  <h3 style="margin-left:50px"> Cars</h3>
+
+  <div class="grid-container">
+
+
+    {% for car in cars_decode %}
+    <div class="card" style="width: 18rem;">
+
+      <textarea>{{car.4}}</textarea>
+      <img class="card-img-top" style="max-width: 100%; width: auto;" src="data:image/jpg;base64,{{ car.4 }}" alt="Still no decode"/>
+      <div class="card-body">
+        <h4 class="card-title">{{ car.0 }}</h4>
+        <p class="card-text">Color:{{ car.2 }}</p>
+
+        <p class="card-text"><strong>Model:</strong>{{ car.1 }}</p>
+        <a href="{% url 'deleteCar' car.3 %}" class="btn btn-danger" style="margin:10px">Delete</a>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-dark" role="alert">
+  There is no car in data base. Please add Your cars with form above. Then you will see your cars here.
+</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+<!--{% url 'edit' car.id %}-->

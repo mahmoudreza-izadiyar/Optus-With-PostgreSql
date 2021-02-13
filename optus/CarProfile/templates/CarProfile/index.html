@@ -1,0 +1,82 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+{% if message %}
+<div class="container">
+
+
+<div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+</div>
+{% endif  %}
+
+{{ hello }}
+
+<!-----------------------------------------------Insert----form ------------------------------------------------------>
+<div class="container">
+  <form method="post" action="{% url 'addCar' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Name of Car</label>
+      <input type="text" class="form-control" id="car" aria-describedby="emailHelp" placeholder="Enter Car Name"
+          name="name" required>
+      <small id="emailHelp" class="form-text text-muted">Your car information plus its beautiful picture will store in
+        our database.</small>
+    </div>
+    <div class="form-group">
+      <label>Color Of car</label>
+      <input type="text" class="form-control"  placeholder="Enter the color of your car"
+         name="color" required>
+    </div>
+    <div class="form-group">
+      <label>Model of Car (Year)</label>
+      <input type="text" class="form-control"  placeholder="Enter the year of manufactured"
+       name="model" required>
+    </div>
+
+
+
+    <div class="custom-file">
+      <label>Picture of the car</label>
+      <input type="file" class="custom-file-input" id="customInput" name="photo" required>
+      <label class="custom-file-label" for="customInput">Choose Picture...</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:12px; text-align:center;">Submit</button>
+  </form>
+</div>
+<!---end--of----Insert----form---------------------------------------------------------------------------------------->
+
+<!-----List----Of ----Object------------------------------------------------------------------------------------------>
+
+
+<div class="container">
+<br>
+  <br>
+  <br>
+  <h3 style="margin-left:50px"> Cars</h3>
+
+  <div class="grid-container">
+
+    {% for car in cars %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ MEDIA_URL }}{{car.photo.url}}" alt="There is Picture to show">
+      <div class="card-body">
+        <h4 class="card-title">{{ car.name }}</h4>
+        <p class="card-text">Color:{{ car.color }}</p>
+        <p class="card-text"><strong>Model:</strong>{{ car.model }}</p>
+        <a href="{% url 'delete' car.id %}" class="btn btn-danger" style="margin:10px">Delete</a><a href="{% url 'edit' car.id %}" class="btn btn-success" style="margin:10px">edit</a>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-dark" role="alert">
+  There is no car in data base. Please add Your cars with form above. Then you will see your cars here.
+</div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

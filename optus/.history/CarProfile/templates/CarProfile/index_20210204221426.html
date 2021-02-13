@@ -1,0 +1,79 @@
+{% extends "CarProfile/layout.html" %}
+{% block body %}
+
+{{ hello }}
+
+<!-----------------------------------------------Insert----form ------------------------------------------------------>
+<div class="container">
+  <form method="post" action="{% url 'addCar' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Name of Car</label>
+      <input type="text" class="form-control" id="car" aria-describedby="emailHelp" placeholder="Enter Car Name"
+        name="name" required>
+      <small id="emailHelp" class="form-text text-muted">Your car information plus its beautiful picture will store in
+        our database.</small>
+    </div>
+    <div class="form-group">
+      <label>Color Of car</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the color of your car"
+        name="color" required>
+    </div>
+    <div class="form-group">
+      <label>Model of Car (Year)</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter the year of manufactured"
+        name="model" required>
+    </div>
+
+
+
+    <div class="custom-file">
+      <label>Picture of the car</label>
+      <input type="file" class="custom-file-input" id="customInput" name="photo" required>
+      <label class="custom-file-label" for="customInput">Choose Picture...</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:12px; text-align:center;">Submit</button>
+  </form>
+</div>
+<!---end--of----Insert----form---------------------------------------------------------------------------------------->
+
+<!-----List----Of ----Object------------------------------------------------------------------------------------------>
+
+
+<div class="container">
+  <br>
+  <br>
+  <br>
+  <h3 style="margin-left:50px"> Cars</h3>
+
+  <div class="grid-container">
+
+    {% for car in cars %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ MEDIA_URL }}{{car.photo.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h4 class="card-title">{{ car.name }}</h4>
+        <p class="card-text">Color:{{ car.color }}</p>
+        <p class="card-text"><strong>Model:</strong>{{ car.model }}</p>
+
+
+
+        <form action="{% url 'edit'  %}" method="POST" id="edit">
+          {% csrf_token %}
+
+          <button class="btn btn-success" style="margin:10px" type="submit" name="edit" value="{{ car.id }}"></button>
+          <button class="btn btn-danger" style="margin:10px" type="submit" name="delete" value="{{ car.id }}"></button>
+        </form>
+        <a href="{% url 'addCar'  %}" class="btn btn-success" style="margin:10px">Edite</a><a href="#"
+          class="btn btn-danger" style="margin:10px">Delete</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}
